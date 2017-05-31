@@ -2,13 +2,21 @@
 <html>
 <head>
   <title>Bloccit</title>
+  <!-- the "viewport meta" tag added inside the <head> instructs browsers on small, high pixel density screens to display our pages at a regular, readable size -->
+  <meta name="viewport" content="width=device-width, iniial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="container">
+    <ul class="nav nav-tabs">
+      <li><%= link_to "Home", welcome_index_path %></li>
+      <li><%= link_to "About", welcome_about_path %></li>
+    </ul>
 
-<%= yield %>
+    <%= yield %>
+  </div>
 
 </body>
 </html>

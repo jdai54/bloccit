@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+/* integrate Bootstrap with our application */
+@import "bootstrap-sprockets";
+@import "bootstrap";
