@@ -12,6 +12,7 @@ end
 # #2
 group :development do
   gem 'sqlite3'
+  gem 'pry-rails'
 end
 
 # #3 add rspec-rails gem to the :development and :test groups because we want its tasks and generators to be available in both environments
