@@ -1,0 +1,12 @@
+<h1>All Posts</h1>
+<!-- #12 iterate over each post in @posts. For each post we create a link with "post.title" as the text that links to "/posts/id", with the id from the "post.id". Instance variables created in a controller method are available in its associated view. Since we create and assign "@posts" in "PostsController#index", we can use it in the posts index view -->
+<% @posts.each do |post| %>
+  <div class="media">
+    <div class="media_body">
+      <h4 class="media-heading">
+        <!--<p><%= link_to post.title, post_path(post.id) %></p> this is the previous line of code. Rails simplifies this by allwoing us to skip the post_path method altogether. If we call link_to with the object to which we're linking as a second argument, the link_to method will detect the object, parse its id, and create a path using the id-->
+        <%= link_to post.title, post %>
+      </h4>
+    </div>
+  </div>
+<% end %>
