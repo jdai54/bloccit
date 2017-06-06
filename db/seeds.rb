@@ -13,7 +13,7 @@ require 'random_data'
   Post.create!(
   # #2 the RandomData method will create random strings for "title" and "body"
     title: RandomData.random_sentence,
-    body: RandomData. random_paragraph
+    body: RandomData.random_paragraph
   )
 end
 posts = Post.all
@@ -28,6 +28,16 @@ posts = Post.all
   )
 end
 
+5.times do
+  Advertisement.create!(
+    title: RandomData.random_sentence,
+    body: RandomData.random_paragraph,
+    price: RandomData.random_number
+  )
+end
+advertisements = Advertisement.all
+
 puts "Seed Finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+puts "#{Advertisement.count} advertisements created"
