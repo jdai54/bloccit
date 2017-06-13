@@ -17,6 +17,7 @@ end
 # #3 add rspec-rails gem to the :development and :test groups because we want its tasks and generators to be available in both environments
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
+  gem 'shoulda'
 end
 
 # Use SCSS for stylesheets
