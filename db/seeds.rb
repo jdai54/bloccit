@@ -16,6 +16,15 @@ require 'random_data'
 end
 topics = Topic.all
 
+# Create sponsored posts
+20.times do
+  Sponsoredpost.create!(
+    topic: topics.sample,
+    title: RandomData.random_sentence,
+    body: RandomData.random_paragraph
+  )
+end
+
 # Create posts
 50.times do
   # #1 use "create!" with a bang which instructs the method to raise an error if there's a problem with the data being seeded. Using "create" without a bang coudl fail without warning causing the error to surface later
@@ -40,5 +49,6 @@ end
 
 puts "Seed Finished"
 puts "#{Topic.count} topics created"
+puts "#{Sponsoredpost.count} sponsored posts created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"

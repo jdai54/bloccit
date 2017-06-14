@@ -21,6 +21,19 @@
         </div>
       </div>
     <% end %>
+<!-- insert sponsored posts -->
+    <h3 class="well">
+      Please check out some of wonderful sponsors!
+    </h3>
+      <% @topic.sponsoredposts.each do |sponsoredpost| %>
+        <div class="media">
+          <div class="media-body">
+            <h4 class="media-heading">
+              <%= link_to sponsoredpost.title, topic_sponsoredpost_path(@topic, sponsoredpost) %>
+            </h4>
+          </div>
+        </div>
+      <% end %>
   </div>
   <div class="col-md-4">
 <!-- #41 replace new_post_path with new_topic_post_path to reflect the nested route generated in routes.rb-->
