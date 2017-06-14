@@ -1,30 +1,36 @@
-<h1>New Sponsored Post<h1>
+<h1>New Sponsored Post</h1>
 
 <div class="row">
   <div class="col-md-4">
-    <p>Guidelines for sponsored posts</p>
+    <p>Guidelines for sponsored posts:</p>
     <ul>
-      <li>Make sure the product/service is doggie approved.</li>
-      <li>Don't use the word "cat".</li>
-      <li>The more you pay the better.</li>
+      <li>Make sure the product/service is actually useful.</li>
+      <li>No profanity is allowed.</li>
+      <li>Give out lots of freebies!</li>
     </ul>
   </div>
   <div class="col-md-8">
     <%= form_for [@topic, @sponsoredpost] do |f| %>
       <div class="form-group">
-<!--# #13 use f.label to display "title". This functionality is provided by form_for which yields a form builder object that provides f.label. f.label creates an HTML <label> tag for the object that is specified which is <label for="post_title">Title</label>  -->
+      <!--# #13 use f.label to display "title". This functionality is provided by form_for which yields a form builder object that provides f.label. f.label creates an HTML <label> tag for the object that is specified which is <label for="post_title">Title</label>-->
         <%= f.label :title %>
-<!--# #14 f.text_field is another method that FormHelper provides and creates an <input> tag of type text. It will yield: <input class="form-control" placeholder="Enter post title" type="text" name="post[title]" id="post_title"> -->
+        <!--# #14 f.text_field is another method that FormHelper provides and creates an <input> tag of type text. It will yield: <input class="form-control" placeholder="Enter post title" type="text" name="post[title]" id="post_title">-->
         <%= f.text_field :title, class: 'form-control', placeholder: "Enter post title" %>
       </div>
       <div class="form-group">
         <%= f.label :body %>
-        <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" %>
+        <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post" %>
       </div>
       <div class="form-group">
-<!--# #15 f.submit yields an input tag of type submit. It will yield:  <input type="submit" name="commit" value="Save" class="btn btn-success"> -->
-        <%= f.submit "Save", class: 'btn btn-success' %>
+        <%= f.label :price %>
+        <%= f.number_field :price, in: 50..150.0, step: 5, class: 'form-control', placeholder: 50 %>
       </div>
+      <div class="form-group">
+        <%= check_box_tag(:agree) %>
+        <%= label_tag(:agree, "I agree to pay the above amount")%>
+      </div>
+      <!--# #15 f.submit yields an input tag of type submit. It will yield:  <input type="submit" name="commit" value="Save" class="btn btn-success">-->
+      <%= f.submit "Save", class: 'btn btn-success' %>
     <% end %>
   </div>
 </div>

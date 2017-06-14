@@ -20,6 +20,14 @@
         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter post body" %>
       </div>
       <div class="form-group">
+        <%= f.label :price %>
+        <%= f.number_field :price, in: 50..150.0, step: 5, class: 'form-control', placeholder: 50 %>
+      </div>
+      <div class="form-group">
+        <%= check_box_tag(:agree) %>
+        <%= label_tag(:agree, "I agree to pay the above amount")%>
+      </div>
+      <div class="form-group">
         <%= f.submit "Save", class: 'btn btn-success' %>
       </div>
     <% end %>
