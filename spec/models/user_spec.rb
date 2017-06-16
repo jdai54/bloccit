@@ -21,6 +21,12 @@ RSpec.describe User, type: :model do
    it "should have name and email attributes" do
      expect(user).to have_attributes(name: "Bloccit User", email: "user@bloccit.com")
    end
+
+   it "should capitalize first and last name" do
+     user.name = "jimmy john"
+     user.save
+     expect(user.name).to eq "Jimmy John"
+   end
   end
   # #1 testing for a value that we know should be invalid. We call this a true negative, as we are testing for a value that shouldn't exist. A true positive follows the reciprocal pattern and tests for a known and valid value. True negatives are a useful testing strategy, because if we only test for values that we know should exist, we may not catch values that shouldn't.
   describe "invalid user" do
