@@ -5,6 +5,8 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 # default_scope will order all posts by their created_at date, in descending order, with the most recent posts displayed first. The most recent posts will be displayed first on topic show views (where the posts associated with a topic are listed)
   default_scope { order('created_at DESC') }
+  scope: ordered_by_title => { order('title DESC')}
+  scope: ordered_by_reverse_created_at => { order('created_at ASC')}
 
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true
