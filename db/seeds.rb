@@ -7,6 +7,16 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'random_data'
 
+# Create Users
+5.times do
+  User.create!(
+  name: RandomData.random_name,
+  email: RandomData.random_email,
+  password: RandomData.random_sentence
+  )
+end
+users = User.all
+
 # Create Topics
 15.times do
   Topic.create!(
@@ -21,6 +31,7 @@ topics = Topic.all
   # #1 use "create!" with a bang which instructs the method to raise an error if there's a problem with the data being seeded. Using "create" without a bang coudl fail without warning causing the error to surface later
   Post.create!(
   # #2 the RandomData method will create random strings for "title" and "body"
+    user: users.sample,
     topic: topics.sample,
     title: RandomData.random_sentence,
     body: RandomData. random_paragraph
@@ -38,7 +49,14 @@ posts = Post.all
   )
 end
 
+user = User.first
+user.update_attributes!(
+  email: 'jdai54@gmail.com',
+  password: 'helloworld'
+)
+
 puts "Seed Finished"
+puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
