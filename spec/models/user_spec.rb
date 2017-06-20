@@ -29,6 +29,54 @@ RSpec.describe User, type: :model do
      user.save
      expect(user.name).to eq "Jimmy John"
    end
+
+   # #1 expect that users will respond to role
+   it "responds to role" do
+     expect(user).to respond_to(:role)
+   end
+
+   # #2 expect users will respond to admin?, which will return whether or not a user is an admin
+   it "responds to admin?" do
+     expect(user).to respond_to(:admin?)
+   end
+
+   # #3 expect users will respond to member?, which will return whether or not a user is a member
+   it "responds to member?" do
+     expect(user).to respond_to(:member?)
+   end
+  end
+
+  describe "roles" do
+    # #4 expect that users will be assigned the role of member by default
+    it "is member by default" do
+      expect(user.role).to eql("member")
+    end
+
+    # #5 test member and admin users within separate contexts
+    context "member user" do
+      it "returns true for #member?" do
+        expect(user.member?).to be_truthy
+      end
+
+      it "returns false for #admin?" do
+        expect(user.admin?).to be_falsey
+      end
+    end
+
+    # #6 test member and admin users within separate contexts
+    context "admin user" do
+      before do
+        user.admin!
+      end
+
+      it "returns false for #member?" do
+        expect(user.member?).to be_falsey
+      end
+
+      it "returns true for #admin?" do
+        expect(user.admin?).to be_truthy
+      end
+    end
   end
   # #1 testing for a value that we know should be invalid. We call this a true negative, as we are testing for a value that shouldn't exist. A true positive follows the reciprocal pattern and tests for a known and valid value. True negatives are a useful testing strategy, because if we only test for values that we know should exist, we may not catch values that shouldn't.
   describe "invalid user" do

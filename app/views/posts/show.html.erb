@@ -8,10 +8,12 @@
     <div class="col-md-8">
       <p><%= @post.body %></p>
     </div>
-    <div class="col-md-4">
-      <!--#42 replace edit_post_path with edit_topic_post_path which takes two arguments, a topic and a post -->
-      <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-success' %>
-      <!-- #9 use link_to to create a delete button. The text of the button is "Delete Post". We override the default method (:post) with :delete so that when the button is pressed the route called is the delete route. We style the button by setting class: to 'btn btn-danger'. We pass a Hash with the  confirm: key to the data: argument. This confirms the action with a JavaScript confirmation dialog when a user presses the button. # 43 We updated link_to to take an array consisting of a topic and post which it uses to build the link to delete a nested post -->
-      <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this post?'} %>
-    </div>
+    <% if user_is_authorized_for_post?(@post) %>
+      <div class="col-md-4">
+        <!--#42 replace edit_post_path with edit_topic_post_path which takes two arguments, a topic and a post -->
+        <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-success' %>
+        <!-- #9 use link_to to create a delete button. The text of the button is "Delete Post". We override the default method (:post) with :delete so that when the button is pressed the route called is the delete route. We style the button by setting class: to 'btn btn-danger'. We pass a Hash with the  confirm: key to the data: argument. This confirms the action with a JavaScript confirmation dialog when a user presses the button. # 43 We updated link_to to take an array consisting of a topic and post which it uses to build the link to delete a nested post -->
+        <%= link_to "Delete Post", [@post.topic, @post], method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this post?'} %>
+      </div>
+    <% end %>
   </div>

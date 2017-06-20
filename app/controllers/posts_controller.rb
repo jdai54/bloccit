@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   # #12 use a before_action filter to call the require_sign_in method before each of our controller actions, except for the show action
   before_action :require_sign_in, except: :show
+  # #10 use a second before_action filter to check the role of a signed-in user. If the current_user isn't authorized based on their role, we'll redirect them to the posts show view
+  before_action :authorize_user, except: [:show, :new, :create]
   def show
     # #19 find the post that corresponds to the id in the params that was passed to "show" and assign it to @post. Unlike in the "index' method, in the "show" method, we populate an instance variable with a single post, rather than a collection of posts
     @post = Post.find(params[:id])
@@ -62,8 +64,16 @@ class PostsController < ApplicationController
   end
 
   private
-
   def post_params
     params.require(:post).permit(:title, :body)
+  end
+
+  def authorize_user
+    post = Post.find(params[:id])
+    # #11 redirect the user unless they own the post they're attempting to modify, or they're an admin
+    unless current_user == post.user || current_user.admin?
+      flash[:alert] = "You must be an admin to do that."
+      redirect_to [post.topic, post]
+    end
   end
 end
