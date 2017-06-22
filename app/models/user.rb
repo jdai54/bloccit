@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   # #6 use Ruby's has_secure_password. has_secure_password "adds methods to set and authenticate against a BCrypt password. This mechanism requires you to have a password_digest attribute". This function abstracts away much of the complexity of obfuscating user passwords using hashing algorithms which we would otherwise be inclined to write to securely save passwords. has_secure_password requires a  password_digest attribute on the model it is applied to. has_secure_password creates two virtual attributes, password and password_confirmation that we use to set and save the password
   has_secure_password
 
-  enum role: [:member, :admin]
+  enum role: [:member, :moderator, :admin]
 
   def format_name
     if name
