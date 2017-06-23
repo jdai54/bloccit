@@ -4,6 +4,10 @@ module TopicsHelper
   end
 
   def moderator_authorized_for_update?
-    current_user.moderator?
+    if current_user
+      current_user.moderator?
+    else
+      false
+    end
   end
 end
