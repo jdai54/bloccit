@@ -14,6 +14,7 @@ RSpec.describe Post, type: :model do
   # #4 associate "post" with "topic" via topic.posts.create!. This is a chained method call which creates a post for a given topic. Also associate user with post
   let(:post) { topic.posts.create!(title: title, body: body, user: user) }
 
+  it { is_expected.to have_many(:comments) }
   it { is_expected.to belong_to(:topic) }
   it { is_expected.to belong_to(:user) }
 

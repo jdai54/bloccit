@@ -4,6 +4,10 @@ module PostsHelper
   end
 
   def moderator_authorizations_for_post?(post)
-    current_user.moderator?
+    if current_user
+      current_user.moderator?
+    else
+      false
+    end
   end
 end
