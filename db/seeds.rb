@@ -29,13 +29,18 @@ topics = Topic.all
 # Create posts
 50.times do
   # #1 use "create!" with a bang which instructs the method to raise an error if there's a problem with the data being seeded. Using "create" without a bang coudl fail without warning causing the error to surface later
-  Post.create!(
+  post = Post.create!(
   # #2 the RandomData method will create random strings for "title" and "body"
     user: users.sample,
     topic: topics.sample,
     title: RandomData.random_sentence,
     body: RandomData. random_paragraph
   )
+
+# #12 update the time a post was created. This makes our seeded data more realistic and will allow us to see our ranking algorithm in action later in the checkpoint
+  post.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+# #13 create between one and five votes for each post. [-1, 1].sample randomly creates either an up vote or a down vote
+  rand(1..5).times { post.votes.create!(value: [-1, 1].sample, user: users.sample) }
 end
 posts = Post.all
 
@@ -79,3 +84,4 @@ puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+puts "#{Vote.count} votes created"
