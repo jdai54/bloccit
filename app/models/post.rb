@@ -5,6 +5,8 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   # #4 add the votes association to Post. This relates the models and allows us to call post.votes. We also add dependent: :destroy to ensure that votes are destroyed when their parent post is deleted
   has_many :votes, dependent: :destroy
+
+  after_create :create_vote
 # default_scope will order all posts by rank by default. Since we want the largest rank numbers displayed first, we'll use descending (DESC) order
   default_scope { order('rank DESC') }
 
@@ -33,5 +35,11 @@ class Post < ActiveRecord::Base
     age_in_days = (created_at - Time.new(1970,1,1)) / 1.day.seconds
     new_rank = points + age_in_days
     update_attribute(:rank, new_rank)
+  end
+
+  private
+
+  def create_vote
+    user.votes.create(value: 1, post: self)
   end
 end
