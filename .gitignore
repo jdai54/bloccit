@@ -68,3 +68,6 @@ build-iPhoneSimulator/
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 >>>>>>> d50f167bea08f80263e04c193790d072dfb38b54
+
+# Ignore application configuration
+/config/application.yml
