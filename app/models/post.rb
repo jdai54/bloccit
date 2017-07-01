@@ -8,6 +8,8 @@ class Post < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
 # default_scope will order all posts by rank by default. Since we want the largest rank numbers displayed first, we'll use descending (DESC) order
   default_scope { order('rank DESC') }
+# #15 use a lambda (->) to ensure that a user is present or signed in. If the user is present, we return all posts. If not, we use the  Active Record joins method to retrieve all posts which belong to a public topic. This query uses a SQL 'inner join' to query a collection's relations in one query
+  scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
 
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true

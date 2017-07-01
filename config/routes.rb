@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   # #7
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
 
   post 'users/confirm' => 'users#confirm'
 

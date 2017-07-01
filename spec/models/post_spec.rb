@@ -7,13 +7,9 @@ RSpec.describe Post, type: :model do
   let(:description) { RandomData.random_paragraph }
   let(:title) { RandomData.random_sentence }
   let(:body) { RandomData.random_paragraph }
-  # #3 create a parent topic for post
-  let(:topic) { Topic.create!(name: name, description: description) }
-  # #1 create a user to associate with a test post
-  let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
-  # #4 associate "post" with "topic" via topic.posts.create!. This is a chained method call which creates a post for a given topic. Also associate user with post
-  let(:post) { topic.posts.create!(title: title, body: body, user: user) }
-
+  let(:topic) { create(:topic) }
+  let(:user) { create(:user) }
+  let(:post) { create(:post) }
   it { is_expected.to have_many(:comments) }
   it { is_expected.to have_many(:votes) }
   it { is_expected.to have_many(:favorites) }
@@ -31,7 +27,7 @@ RSpec.describe Post, type: :model do
   # #2 test whether "post" has attributes named "title" and "body". This tests whether "post' will return a non-nil value when "post.title" and "post.body" are called
   describe "attributes" do
     it "has a title, body, and user attribute" do
-      expect(post).to have_attributes(title: title, body: body, user: user)
+      expect(post).to have_attributes(title: post.title, body: post.body)
     end
   end
 
